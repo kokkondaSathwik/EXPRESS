@@ -4,6 +4,24 @@
     // create express application
     const app = exp();
 
+
+    //testing of middleware at application level
+    function test1(req,res,next)
+    {
+        console.log('test1 middleware called');
+        next();
+    }
+
+
+    function test2(req,res,next)
+    {
+        console.log('test2 middleware called');
+        next();
+    }
+    // app.use(test1);
+    app.use(test2);
+    app.use(test1);
+
     //body parsing
     app.use(exp.json());
 
