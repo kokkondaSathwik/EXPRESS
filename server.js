@@ -4,7 +4,8 @@
     // create express application
     const app = exp();
 
-    //
+    //body parsing
+    app.use(exp.json());
 
     //sample user data
     let users = [
@@ -44,15 +45,50 @@
     app.post('/new-user',(req,res)=>{
         //get new user obj
         let newUser=req.body;
-        console.log(newUser);
+        //add new user to users array
+        users.push(newUser);
+        //send response
+        res.send({message:'User created successfully'});
+
     })
     //update a user by Id
     app.put('/user',(req,res)=>{
-        res.send('Update a User by Id');
+        //get modifieduser details
+        let modifiedUser=req.body;
+        //find index of user to be updated
+        let index = users.findIndex((u)=>u.id === modifiedUser.id);
+        //if user not found
+        if(index === -1)
+        {
+            res.send({message:'User not found'});
+        }
+        else
+        {
+            //update user details
+            users[index].name = modifiedUser.name;
+            //send response
+            res.send({message:'User updated successfully'});
+        }
+
     })
     //delete a user by Id
-    app.delete('/users/id',(req,res)=>{
-        res.send('Delete a User by Id');
+    app.delete('/users/:id',(req,res)=>{
+        //get id from url
+        let id = Number(req.params.id);
+        //find index of user to be deleted
+        let index = users.findIndex((u)=>u.id === id);
+        //if user not found
+        if(index === -1)
+        {
+            res.send({message:'User not found'});
+        }
+        else
+        {
+            //delete user from users array
+            users.splice(index,1);
+            //send response
+            res.send({message:'User deleted successfully'});
+        }
     })
 
 //assign port numbr to HTTP Server
