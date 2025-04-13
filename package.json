@@ -9,7 +9,11 @@
   "author": "Sathwik",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2"
+    "bcryptjs": "^3.0.2",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.15.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"

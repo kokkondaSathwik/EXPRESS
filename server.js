@@ -4,8 +4,40 @@
     // create express application
     const app = exp();
 
-    //import user and product app
+    //import MongoClient
+    const mongoClient=require('mongodb').MongoClient;
 
+
+    //connect mongodb server using mongoclient
+    mongoClient.connect('mongodb://localhost:27017')
+    .then(client=>{
+        //get database object
+        const dbObj=client.db('vnrb2db')
+
+        //get collection object
+        const userscollectionsObject=dbObj.collection('userscollections')
+        const productscollectionObject=dbObj.collection('productscollection')
+        
+
+        //Share the two Collections Objects to the apis
+        app.set('userscollectionsObject',userscollectionsObject);
+        app.set('productscollectionObject',productscollectionObject);
+
+        //confirmation message for db connection
+
+
+        console.log('DB connected successfully');
+    })
+    .catch(err=>{
+        console.log("DB connection failed",err);
+    })
+
+
+
+
+
+
+    //import user and product app
     const userApp = require('./APIs/userApi');
     const productsApp = require('./APIs/productsApi');
 

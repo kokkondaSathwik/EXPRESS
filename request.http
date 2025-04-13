@@ -6,13 +6,24 @@ GET http://localhost:4000/products-api/products
 ###
 GET http://localhost:4000/user-api/users/2
 
-###
+###CREATE USER
 POST http://localhost:4000/user-api/new-user
 Content-Type: application/json
 
 {
-   "id":3,
-   "name":"John Doe"
+   "username":"ravi",
+   "password":"ravi",
+   "email":"ravi@mail.com"
+   
+}
+
+###LOGIN USER
+POST http://localhost:4000/user-api/login
+Content-Type: application/json
+
+{
+   "username":"ravi",
+   "password":"ravi"
 }
 
 
@@ -21,9 +32,14 @@ PUT http://localhost:4000/user-api/user
 Content-Type: application/json
 
 {
-   "id":12,
-   "name":"Kokkonda"
+   "username":"ravi",
+   "email":"ravikumar@mail.com",
+   "age":24
 }
 
 ###
-DELETE http://localhost:4000/user-api/users/1
+DELETE http://localhost:4000/user-api/users/raju
+
+###REQUEST FOR PROTECTED ROUTE
+get http://localhost:4000/user-api/test-protected
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhdmkiLCJpYXQiOjE3NDQ1NDgzNTAsImV4cCI6MTc0NDU0ODM5MH0.W8j5e5Komyrf_Cy2V8EKANbcc01mVBm743bMHOXtAj0
